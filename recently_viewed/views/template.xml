@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+<data>
+	
+	<template id="assets_frontend" inherit_id="website.assets_frontend" name="Shop">
+		<!-- Import css and js file -->
+	  <xpath expr="." position="inside">
+	      <link rel='stylesheet' href='/website_sale/static/src/css/website_sale.css'/>
+	      <link rel='stylesheet' href='/website_sale/static/src/css/website_mail.css'/>
+	      <link rel='stylesheet' href='/recently_viewed/static/src/css/recently_view.css'/>
+	      <script type="text/javascript" src="/recently_viewed/static/src/js/recently_viewed_product.js"></script>
+	  </xpath>
+	</template>
+	
+	<!-- RECENT PRODUCT VIEW FOR SHOP HOME PAGE -->
+	<template id="recent_viewed_products_categories" inherit_id="website_sale.products" active="False" customize_show="True" name="Recently Viewed Product">
+		<xpath expr="//div[@id='products_grid']" position="after">		
+		<t t-set="recent_viwed_product_list" t-value="website.get_recently_viewed_product()"/>
+		 <div style="margin-left:82%;">		
+	        <table id="recent_view_product_id" t-if="recent_viwed_product_list" class="recent_view_color">
+	        	<h4 align="center">Recently Viewed </h4>
+		    	  <tbody>
+		            <t t-foreach="recent_viwed_product_list" t-as="product_list">
+		              <tr>
+		                  <td colspan="2" t-if="not product_list"></td>
+		                  <td align="center" t-if="product_list">
+		                  	<input type="hidden" name="hidden_product_id_from_cart" t-att-value="product_list.id"/>
+		                  	<span t-field="product_list.image_small"
+		                            t-field-options='{"widget": "image", "class": "img-rounded"}'/>
+		                  </td>
+		                  <td t-if="product_list.product_tmpl_id" style="padding: 10px;">
+		                      <div>
+		                          <a t-attf-href="/shop/product/#{ slug(product_list.product_tmpl_id) }">
+		                              <strong t-esc="product_list.name_get()[0][1]" class="recent_view_fontsize_prod"/>
+		                          </a>
+		                      </div>
+		                      <div class="text-muted recent_view_fontsize_prod2" t-field="product_list.name"/>
+		                  </td>
+		                </tr>
+		               </t>
+		            </tbody>
+	         </table>
+         </div>
+		</xpath>	
+		
+	</template>
+	
+	<template id="product_wish_list" inherit_id="website_sale.product" name="Header">
+	  	<xpath expr="//div[@class='js_product']" position="after">
+		  	<input type="hidden" name="product_id_new" t-att-value="product.product_variant_ids[0].id"/>	
+		</xpath>
+  	</template>
+	
+	<template id="product_inherit" inherit_id="website_sale.product">
+	  	<xpath expr="//a[@onclick='history.go(-1); return false;']" position="replace">
+		  	<a t-att-href="keep(category=0)" onclick="redirect_to_shop(); return false;">Products</a>	
+		</xpath>
+  	</template>
+  	
+  	<!-- INHERIT CHECKOUT VIEW TO CHNAGE TOTAL TO PAY FIELD-->
+	<template id="recent_view_checkout_view_inherit_id" inherit_id="website_sale.checkout">
+		<xpath expr="//div[@class='col-lg-offset-1 col-lg-3 col-md-3 text-muted']" position="replace">
+			<div class="col-lg-offset-1 col-lg-3 col-md-3 text-muted">
+              <h3 class="page-header mt16">Your Order <small><a href="/shop/cart"><span class="fa fa-arrow-right"/> change</a></small></h3>
+              <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
+              <div class="row">
+                  <div class="col-sm-6 text-right">Subtotal: </div>
+                  <div class="col-sm-6"><span style="white-space: nowrap;" t-field="website_sale_order.amount_untaxed" t-field-options='{
+                      "widget": "monetary",
+                      "display_currency": "user_id.partner_id.property_product_pricelist.currency_id"
+                  }'/></div>
+                  <div class="col-sm-6 text-right">Taxes: </div>
+                  <div class="col-sm-6"><span style="white-space: nowrap;" t-field="website_sale_order.amount_tax" t-field-options='{
+                      "widget": "monetary",
+                      "display_currency": "user_id.partner_id.property_product_pricelist.currency_id"
+                  }'/></div>
+                  <div class="col-sm-6 text-right"><h4>Total: </h4></div>
+                  <div class="col-sm-6"><h4><span style="white-space: nowrap;" t-field="website_sale_order.amount_total" t-field-options='{
+                      "widget": "monetary",
+                      "display_currency": "user_id.partner_id.property_product_pricelist.currency_id"
+                  }'/></h4></div>
+              </div>
+          </div>
+		</xpath>
+	</template>	
+	
+</data>
+</openerp>

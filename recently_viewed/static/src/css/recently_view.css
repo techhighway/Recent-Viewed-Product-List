@@ -1,0 +1,25 @@
+.col-md-9{
+	width:58% 
+}
+
+.col-md-3{
+  width:22%;
+}
+
+.recent_view_color{
+	background-color:#F8F8F8;
+	
+}
+
+.recent_view_fontsize_prod{
+	font-size:12px;
+	
+}
+
+.recent_view_fontsize_prod2{
+	font-size:10px;
+	
+}
+h4{
+  font-weight:bold !important;
+}
