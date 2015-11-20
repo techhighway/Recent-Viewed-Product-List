@@ -16,8 +16,6 @@ TechHighway E-Commerce
     		],
     	'qweb'	: ['static/src/xml/*.xml'],
 	'images': ['static/description/recently_viewed_product_img.png'],
-        'price': 10,
-        'currency': 'EUR',
     	'installable': True,
     	'application': True,
 }
