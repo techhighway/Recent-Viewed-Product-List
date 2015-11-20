@@ -1,0 +1,25 @@
+/* Add Product To Recently Viwed Product List*/
+$( document ).ready(function() {
+function recent_product_viewed() {
+	var url = window.location.href;
+	if(url.indexOf('/shop/product/') != -1){
+	    //console.log("create post is working!");
+		var product_id = document.getElementsByName("product_id_new")[0].value;
+		if (product_id==0){
+			return false;
+		}
+	    $.ajax({
+		url : "/shop/add_product_to_recently_viewed", 
+			data: { product_id: product_id},
+		success : function(data) {
+		},
+		error : function() {
+		}
+	    });
+    }
+};
+
+recent_product_viewed();
+
+});
+

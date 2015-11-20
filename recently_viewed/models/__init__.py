@@ -1,0 +1,1 @@
+import recently_viewed_product
