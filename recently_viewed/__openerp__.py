@@ -9,7 +9,7 @@ TechHighway E-Commerce
 ======================
 
         """,
-    	'author'	: 'TechHighway System Pvt. Ltd.',
+    	'author'	: 'TechHighway Systems Pvt. Ltd.',
     	'depends'	: ['website', 'sale', 'payment','website_sale'],
     	'data'	: [
 		'views/template.xml',
