@@ -1,7 +1,7 @@
 {
-    'name': 'Recent Viewed Product List',
+    'name': 'Recently Viewed Product List',
     'category': 'Website',
-    'summary': 'View Your Recent Product List',
+    'summary': 'View Your Recently Viewed Product List',
     'website': 'https://www.techhighway.co.in',
     'version': '1.0',
     'description': """
